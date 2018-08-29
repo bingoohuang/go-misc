@@ -17,9 +17,9 @@ func mergeRights() {
 
 	rights := []Right{}
 
-	err = db.Select(&rights, "select ID, RIGHT_CODE, RIGHT_NAME, RIGHT_TYPE, RIGHT_DESC, COALESCE(SERVPACK_ID,'') SERVPACK_ID, "+
-		"COALESCE(`URL`, '') URL, COALESCE(CHAIN_NAME, '') CHAIN_NAME, COALESCE(CHAIN_DEFINITION, '') CHAIN_DEFINITION, `ORDER` "+
-		"from tt_d_funcright order by right_code, servpack_id")
+	err = db.Select(&rights, `select ID, RIGHT_CODE, RIGHT_NAME, RIGHT_TYPE, RIGHT_DESC, COALESCE(SERVPACK_ID,'') SERVPACK_ID, 
+		COALESCE(URL, '') URL, COALESCE(CHAIN_NAME, '') CHAIN_NAME, COALESCE(CHAIN_DEFINITION, '') CHAIN_DEFINITION 
+		from tt_d_funcright order by right_code, RIGHT_NAME, servpack_id`)
 	if err != nil {
 		fmt.Printf("Select:\n    %v", err)
 		return
