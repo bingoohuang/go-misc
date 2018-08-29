@@ -9,7 +9,7 @@ CREATE TABLE `tt_f_role_right` (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 ROW_FORMAT = COMPACT COMMENT = '角色权限*';
 
 ALTER TABLE `users` ADD `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
-
+ALTER TABLE tt_d_funcright MODIFY COLUMN SERVPACK_ID varchar(500) NULL  COMMENT '服务包ID'	;
 
 insert into tt_d_funcright(RIGHT_CODE, RIGHT_NAME, RIGHT_TYPE, RIGHT_DESC, SERVPACK_ID, `URL`, CHAIN_NAME, CHAIN_DEFINITION, `ORDER`) values
 ('MENU:HM:COACH', '教练管理', '1', '教练管理', '10011101', null, null, null, '1'),
