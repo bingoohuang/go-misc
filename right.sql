@@ -11,6 +11,27 @@ CREATE TABLE `tt_f_role_right` (
 ALTER TABLE `users` ADD `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
 ALTER TABLE tt_d_funcright MODIFY COLUMN SERVPACK_ID varchar(500) NULL  COMMENT '服务包ID'	;
 
+CREATE TABLE `role_funcright` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ROLE_ID` varchar(500) NOT NULL COMMENT '角色ID',
+  `ACL` varchar(500) DEFAULT NULL COMMENT 'ACL',
+  `RIGHT_CODE` varchar(100) NOT NULL,
+  `RIGHT_NAME` varchar(50) NOT NULL COMMENT '权限名称',
+  `RIGHT_TYPE` char(1) NOT NULL DEFAULT '1' COMMENT '权限类别：1-菜单权限；2-按钮权限; 3-系统权限',
+  `RIGHT_DESC` varchar(500) DEFAULT NULL COMMENT '权限说明',
+  `SERVPACK_ID` varchar(500) DEFAULT NULL COMMENT '服务包ID',
+  `URL` varchar(200) DEFAULT NULL COMMENT 'URL',
+  `CHAIN_NAME` varchar(200) DEFAULT NULL COMMENT 'URL匹配路径,支持ANT模式,同URL,URL会废弃',
+  `CHAIN_DEFINITION` varchar(300) DEFAULT NULL COMMENT 'chain_name对应的拦截器',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB AUTO_INCREMENT = 1427 DEFAULT CHARSET = utf8mb4 ROW_FORMAT = COMPACT COMMENT = '功能权限信息';
+
+select r.ROLE_ID, r.RIGHT_CODE, f.RIGHT_NAME, f.RIGHT_TYPE, f.RIGHT_DESC, f.SERVPACK_ID, f.URL, f.CHAIN_NAME, f.CHAIN_DEFINITION
+from tt_f_role_right r, tt_d_funcright f
+where r.RIGHT_CODE = f.RIGHT_CODE
+order by f.right_code, f.RIGHT_NAME, f.servpack_id;
+
+
 insert into tt_d_funcright(RIGHT_CODE, RIGHT_NAME, RIGHT_TYPE, RIGHT_DESC, SERVPACK_ID, `URL`, CHAIN_NAME, CHAIN_DEFINITION, `ORDER`) values
 ('MENU:HM:COACH', '教练管理', '1', '教练管理', '10011101', null, null, null, '1'),
 ('MENU:HM:COACH', '教练管理', '1', '教练管理', '10011201', null, null, null, '1'),
